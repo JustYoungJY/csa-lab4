@@ -187,12 +187,8 @@ machine_code: '0000 - 0D00005D - jmp 93
 
   0092 - 12000000 - halt
 
-  0093 - 11000000 - iret
-
-  '
-processor_trace: '--- �������� ��������� ---
-
-  TICK: 0001 | PC: 0001 | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  0093 - 11000000 - iret'
+processor_trace: 'TICK: 0001 | PC: 0001 | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
 
   TICK: 0003 | PC: 0002 | OP: push 100       | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
 
@@ -250,4 +246,6 @@ processor_trace: '--- �������� ��������� ---
 
   TICK: 0057 | PC: 0029 | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
 
-  ... (4433 more lines, omitted for brevity)'
+  TICK: 0059 | PC: 0030 | OP: store          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+
+  ... (4430 more lines, omitted for brevity)'

@@ -361,12 +361,8 @@ machine_code: '0000 - 0D000096 - jmp 150
 
   0179 - 02000000 - pop
 
-  0180 - 11000000 - iret
-
-  '
-processor_trace: '--- �������� ��������� ---
-
-  TICK: 0001 | PC: 0001 | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  0180 - 11000000 - iret'
+processor_trace: 'TICK: 0001 | PC: 0001 | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
 
   TICK: 0003 | PC: 0002 | OP: push 3000      | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
 
@@ -426,22 +422,4 @@ processor_trace: '--- �������� ��������� ---
 
   TICK: 0060 | PC: 0163 | OP: add            | TOS:            0 | DS: 3 | RS: 1 | C: 0 | V: 0
 
-  TICK: 0062 | PC: 0164 | OP: push_m 1031    | TOS:         3000 | DS: 2 | RS: 1 | C: 0 | V: 0
-
-  TICK: 0064 | PC: 0165 | OP: store          | TOS:            5 | DS: 3 | RS: 1 | C: 0 | V: 0
-
-  TICK: 0066 | PC: 0166 | OP: push 0         | TOS:            0 | DS: 1 | RS: 1 | C: 0 | V: 0
-
-  TICK: 0068 | PC: 0167 | OP: pop            | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
-
-  TICK: 0070 | PC: 0168 | OP: push 1025      | TOS:            0 | DS: 1 | RS: 1 | C: 0 | V: 0
-
-  TICK: 0072 | PC: 0169 | OP: push_m 1025    | TOS:         1025 | DS: 2 | RS: 1 | C: 0 | V: 0
-
-  TICK: 0074 | PC: 0170 | OP: push 1         | TOS:            0 | DS: 3 | RS: 1 | C: 0 | V: 0
-
-  TICK: 0076 | PC: 0171 | OP: add            | TOS:            1 | DS: 4 | RS: 1 | C: 0 | V: 0
-
-  TICK: 0078 | PC: 0172 | OP: store          | TOS:            1 | DS: 3 | RS: 1 | C: 0 | V: 0
-
-  ... (916 more lines, omitted for brevity)'
+  ... (923 more lines, omitted for brevity)'
