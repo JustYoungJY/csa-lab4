@@ -24,3 +24,7 @@ def test_double_precision(check):
 
 def test_loop_demo(check):
     check("loop_demo")
+
+
+def test_expr_values(check):
+    check("expr_values")

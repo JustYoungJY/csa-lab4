@@ -17,7 +17,7 @@ def pytest_addoption(parser):
         "--update-golden",
         action="store_true",
         default=False,
-        help="Rewrite expected_output in golden/*.yaml instead of asserting",
+        help="Rewrite out_stdout in golden/*.yaml instead of asserting",
     )
 
 
@@ -56,16 +56,18 @@ def run_lisp(lisp_file: str, schedule_file: str | None = None) -> str:
         assert r.returncode == 0, f"Machine failed for {lisp_file}:\n{r.stdout}\n{r.stderr}"
 
         # Parse "Output: <data>\n" from stdout.
+        # We search by index rather than splitlines() so that embedded newlines
+        # inside the output are not lost.
         stdout = r.stdout
         prefix = "Output: "
         idx = stdout.find(prefix)
         if idx != -1:
             raw = stdout[idx + len(prefix) :]
             if raw.endswith("\n"):
-                raw = raw[:-1]
+                raw = raw[:-1]  # strip the newline that print() appends
             return raw
 
-        return stdout
+        return stdout  # fallback for diagnostics
 
     finally:
         if os.path.exists(bin_file):
@@ -84,7 +86,7 @@ def check(request):
     """Fixture used in each test: check(name) either asserts or updates the golden file.
 
     Normal run:
-        assert actual_output == golden["expected_output"]
+        assert actual_output == golden["out_stdout"]
 
     With --update-golden:
         writes actual_output back into golden/<name>.yaml and always passes.
@@ -95,7 +97,7 @@ def check(request):
         output = run_lisp(g["source_file"], g["input_file"])
 
         if request.config.getoption("--update-golden"):
-            g["expected_output"] = output
+            g["out_stdout"] = output
             golden_path = os.path.join(ROOT, "golden", f"{name}.yaml")
             with open(golden_path, "w", encoding="utf-8") as f:
                 yaml.dump(
@@ -103,6 +105,6 @@ def check(request):
                 )
             return
 
-        assert output == g["expected_output"]
+        assert output == g["out_stdout"]
 
     return _check

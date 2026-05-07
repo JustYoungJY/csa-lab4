@@ -1,125 +1,87 @@
 source_file: programs/cat.lisp
 input_file: input/cat.txt
-expected_output: 'hello
-
-  '
-machine_code: '0000 - 0D00000A - jmp 10
-
+out_stdout: |
+  hello
+out_code_hex: |-
+  0000 - 0D00000A - jmp 10
   0001 - 01000000 - push 0
-
   0002 - 1A000000 - sti
-
   0003 - 01000000 - push 0
-
   0004 - 01000001 - push 1
-
   0005 - 0E000009 - jz 9
-
   0006 - 02000000 - pop
-
   0007 - 01000000 - push 0
-
   0008 - 0D000004 - jmp 4
-
   0009 - 12000000 - halt
-
   0010 - 01000400 - push 1024
-
   0011 - 13000FF1 - push_m 4081
-
   0012 - 04000000 - store
-
   0013 - 13000400 - push_m 1024
-
   0014 - 02000000 - pop
-
   0015 - 13000400 - push_m 1024
-
   0016 - 01000000 - push 0
-
   0017 - 0A000000 - cmp
-
   0018 - 01000000 - push 0
-
   0019 - 0A000000 - cmp
-
   0020 - 0E00001A - jz 26
-
   0021 - 01000FF0 - push 4080
-
   0022 - 13000400 - push_m 1024
-
   0023 - 04000000 - store
-
   0024 - 01000000 - push 0
-
   0025 - 0D00001C - jmp 28
-
   0026 - 12000000 - halt
-
   0027 - 01000000 - push 0
-
   0028 - 02000000 - pop
-
-  0029 - 11000000 - iret'
-processor_trace: 'TICK: 0001 | PC: 0001 | OP: push 0         | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-
+  0029 - 11000000 - iret
+out_log: |-
+  TICK: 0001 | PC: 0001 | OP: push 0         | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
   TICK: 0003 | PC: 0002 | OP: sti            | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
-
   TICK: 0005 | PC: 0003 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
-
   TICK: 0007 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
-
   TICK: 0009 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
-
   TICK: 0012 | PC: 0000 | OP: jmp 10         | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
-
   TICK: 0014 | PC: 0010 | OP: push 1024      | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
-
   TICK: 0016 | PC: 0011 | OP: push_m 4081    | TOS:         1024 | DS: 3 | RS: 1 | C: 0 | V: 0
-
   TICK: 0018 | PC: 0012 | OP: store          | TOS:          104 | DS: 4 | RS: 1 | C: 0 | V: 0
-
   TICK: 0020 | PC: 0013 | OP: push_m 1024    | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
-
   TICK: 0022 | PC: 0014 | OP: pop            | TOS:          104 | DS: 3 | RS: 1 | C: 0 | V: 0
-
   TICK: 0024 | PC: 0015 | OP: push_m 1024    | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
-
   TICK: 0026 | PC: 0016 | OP: push 0         | TOS:          104 | DS: 3 | RS: 1 | C: 0 | V: 0
-
   TICK: 0028 | PC: 0017 | OP: cmp            | TOS:            0 | DS: 4 | RS: 1 | C: 0 | V: 0
-
   TICK: 0030 | PC: 0018 | OP: push 0         | TOS:            0 | DS: 3 | RS: 1 | C: 0 | V: 0
-
   TICK: 0032 | PC: 0019 | OP: cmp            | TOS:            0 | DS: 4 | RS: 1 | C: 0 | V: 0
-
   TICK: 0034 | PC: 0020 | OP: jz 26          | TOS:            1 | DS: 3 | RS: 1 | C: 0 | V: 0
-
   TICK: 0036 | PC: 0021 | OP: push 4080      | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
-
   TICK: 0038 | PC: 0022 | OP: push_m 1024    | TOS:         4080 | DS: 3 | RS: 1 | C: 0 | V: 0
-
   TICK: 0040 | PC: 0023 | OP: store          | TOS:          104 | DS: 4 | RS: 1 | C: 0 | V: 0
-
   TICK: 0042 | PC: 0024 | OP: push 0         | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
-
   TICK: 0044 | PC: 0025 | OP: jmp 28         | TOS:            0 | DS: 3 | RS: 1 | C: 0 | V: 0
-
   TICK: 0046 | PC: 0028 | OP: pop            | TOS:            0 | DS: 3 | RS: 1 | C: 0 | V: 0
-
   TICK: 0048 | PC: 0029 | OP: iret           | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
-
   TICK: 0051 | PC: 0000 | OP: jmp 10         | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
-
   TICK: 0053 | PC: 0010 | OP: push 1024      | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
-
   TICK: 0055 | PC: 0011 | OP: push_m 4081    | TOS:         1024 | DS: 3 | RS: 1 | C: 0 | V: 0
-
   TICK: 0057 | PC: 0012 | OP: store          | TOS:          101 | DS: 4 | RS: 1 | C: 0 | V: 0
-
   TICK: 0059 | PC: 0013 | OP: push_m 1024    | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
-
   TICK: 0061 | PC: 0014 | OP: pop            | TOS:          101 | DS: 3 | RS: 1 | C: 0 | V: 0
-
-  ... (102 more lines, omitted for brevity)'
+  TICK: 0063 | PC: 0015 | OP: push_m 1024    | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0065 | PC: 0016 | OP: push 0         | TOS:          101 | DS: 3 | RS: 1 | C: 0 | V: 0
+  TICK: 0067 | PC: 0017 | OP: cmp            | TOS:            0 | DS: 4 | RS: 1 | C: 0 | V: 0
+  TICK: 0069 | PC: 0018 | OP: push 0         | TOS:            0 | DS: 3 | RS: 1 | C: 0 | V: 0
+  TICK: 0071 | PC: 0019 | OP: cmp            | TOS:            0 | DS: 4 | RS: 1 | C: 0 | V: 0
+  TICK: 0073 | PC: 0020 | OP: jz 26          | TOS:            1 | DS: 3 | RS: 1 | C: 0 | V: 0
+  TICK: 0075 | PC: 0021 | OP: push 4080      | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0077 | PC: 0022 | OP: push_m 1024    | TOS:         4080 | DS: 3 | RS: 1 | C: 0 | V: 0
+  TICK: 0079 | PC: 0023 | OP: store          | TOS:          101 | DS: 4 | RS: 1 | C: 0 | V: 0
+  TICK: 0081 | PC: 0024 | OP: push 0         | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0083 | PC: 0025 | OP: jmp 28         | TOS:            0 | DS: 3 | RS: 1 | C: 0 | V: 0
+  TICK: 0085 | PC: 0028 | OP: pop            | TOS:            0 | DS: 3 | RS: 1 | C: 0 | V: 0
+  TICK: 0087 | PC: 0029 | OP: iret           | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0090 | PC: 0000 | OP: jmp 10         | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0092 | PC: 0010 | OP: push 1024      | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0094 | PC: 0011 | OP: push_m 4081    | TOS:         1024 | DS: 3 | RS: 1 | C: 0 | V: 0
+  TICK: 0096 | PC: 0012 | OP: store          | TOS:          108 | DS: 4 | RS: 1 | C: 0 | V: 0
+  TICK: 0098 | PC: 0013 | OP: push_m 1024    | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0100 | PC: 0014 | OP: pop            | TOS:          108 | DS: 3 | RS: 1 | C: 0 | V: 0
+  TICK: 0102 | PC: 0015 | OP: push_m 1024    | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
+  ... (82 more lines, omitted for brevity)

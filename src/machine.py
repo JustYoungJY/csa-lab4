@@ -40,13 +40,13 @@ class DataPath:
         if addr == PORT_OUT_CHAR:
             self.output_buffer.append(chr(val % 256))
         elif addr == PORT_OUT_INT:
-            self.output_buffer.append(str(val) + " ")
+            self.output_buffer.append(str(val))
         elif addr == PORT_OUT_INT64_HI:
             self._int64_hi_buf = signed32(val)
         elif addr == PORT_OUT_INT64_LO:
             hi_s = self._int64_hi_buf
             lo_u = val & MASK32
-            self.output_buffer.append(str(hi_s * (1 << 32) + lo_u) + " ")
+            self.output_buffer.append(str(hi_s * (1 << 32) + lo_u))
         else:
             self.memory[addr] = val
 
