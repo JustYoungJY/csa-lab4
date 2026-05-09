@@ -88,7 +88,7 @@ def run_lisp(
         prefix = "Output: "
         idx = stdout.find(prefix)
         if idx != -1:
-            raw = stdout[idx + len(prefix):]
+            raw = stdout[idx + len(prefix) :]
             if raw.endswith("\n"):
                 raw = raw[:-1]
             output = raw
@@ -127,9 +127,7 @@ def check(request):
 
     def _check(name: str):
         g = load_golden(name)
-        output, code_hex, log, source_text, stdin_text = run_lisp(
-            g["source_file"], g["input_file"]
-        )
+        output, code_hex, log, source_text, stdin_text = run_lisp(g["source_file"], g["input_file"])
 
         if request.config.getoption("--update-golden"):
             new_g: dict = {
