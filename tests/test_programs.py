@@ -28,3 +28,7 @@ def test_loop_demo(check):
 
 def test_expr_values(check):
     check("expr_values")
+
+
+def test_input_overflow(check):
+    check("input_overflow")

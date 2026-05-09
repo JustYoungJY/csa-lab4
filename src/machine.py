@@ -13,6 +13,37 @@ PORT_OUT_INT64_LO = 4084
 
 MASK32 = 0xFFFFFFFF
 
+FETCH_TICKS = 3
+
+_EXEC_TICKS: dict[Opcode, int] = {
+    Opcode.PUSH: 1,
+    Opcode.POP: 1,
+    Opcode.PUSH_M: 3,
+    Opcode.POP_M: 2,
+    Opcode.LOAD: 3,
+    Opcode.STORE: 3,
+    Opcode.ADD: 1,
+    Opcode.SUB: 1,
+    Opcode.MUL: 1,
+    Opcode.DIV: 1,
+    Opcode.MOD: 1,
+    Opcode.CMP: 1,
+    Opcode.GT: 1,
+    Opcode.LT: 1,
+    Opcode.ADC: 1,
+    Opcode.SBB: 1,
+    Opcode.MUL64: 2,
+    Opcode.PUSH_CARRY: 1,
+    Opcode.PUSH_OVERFLOW: 1,
+    Opcode.JMP: 1,
+    Opcode.JZ: 1,
+    Opcode.CALL: 1,
+    Opcode.RET: 1,
+    Opcode.IRET: 1,
+    Opcode.HALT: 1,
+    Opcode.STI: 1,
+}
+
 
 def signed32(x: int) -> int:
     """Truncate an arbitrary integer to the signed 32-bit range."""
@@ -25,7 +56,7 @@ class DataPath:
         self.memory: list[int] = [0] * memory_size
         self.data_stack: list[int] = []
         self.return_stack: list[int] = []
-        self.input_buffer: list[str] = []
+        self.input_reg: str | None = None
         self.output_buffer: list[str] = []
         self.carry: int = 0
         self.overflow: int = 0
@@ -33,7 +64,11 @@ class DataPath:
 
     def read_mem(self, addr: int) -> int:
         if addr == PORT_IN:
-            return ord(self.input_buffer.pop(0)) if self.input_buffer else 0
+            if self.input_reg is not None:
+                val = ord(self.input_reg)
+                self.input_reg = None
+                return val
+            return 0
         return self.memory[addr]
 
     def write_mem(self, addr: int, val: int) -> None:
@@ -79,26 +114,30 @@ class ControlUnit:
         self.irq: bool = False
         self.halted: bool = False
 
-    def tick(self) -> None:
-        self.tick_counter += 1
-
-        if self.schedule and self.tick_counter >= self.schedule[0][0]:
-            _, char = self.schedule.pop(0)
-            self.dp.input_buffer.append(char)
+    def tick(self, n: int = 1) -> None:
+        for _ in range(n):
+            self.tick_counter += 1
+            if self.schedule and self.tick_counter >= self.schedule[0][0]:
+                _, char = self.schedule.pop(0)
+                if self.dp.input_reg is None:
+                    self.dp.input_reg = char
+                # else: register occupied. New character is silently dropped
 
     def decode_and_execute(self) -> None:
-        self.irq = bool(self.dp.input_buffer)
+        self.tick()
+        self.irq = self.dp.input_reg is not None
         if self.ie and self.irq:
+            self.tick(FETCH_TICKS - 1)
             self.dp.return_stack.append(self.pc)
             self.pc = 0
             self.ie = False
             self.irq = False
-            self.tick()
+            return
 
+        self.tick(FETCH_TICKS - 1)
         machine_word = self.dp.read_mem(self.pc)
         instr = Instruction.decode(struct.pack(">I", machine_word))
         self.pc += 1
-        self.tick()
 
         logging.info(
             f"TICK: {self.tick_counter:04} | PC: {self.pc - 1:04} | OP: {instr!s:<14} | "
@@ -110,30 +149,23 @@ class ControlUnit:
 
         if opcode == Opcode.HALT:
             self.halted = True
-            self.tick()
 
         elif opcode == Opcode.PUSH:
             self.dp.data_stack.append(instr.arg)
-            self.tick()
         elif opcode == Opcode.POP:
             self.dp.data_stack.pop()
-            self.tick()
         elif opcode == Opcode.PUSH_M:
             self.dp.data_stack.append(self.dp.read_mem(instr.arg))
-            self.tick()
         elif opcode == Opcode.POP_M:
             self.dp.write_mem(instr.arg, self.dp.data_stack.pop())
-            self.tick()
 
         elif opcode == Opcode.LOAD:
             addr = self.dp.data_stack.pop()
             self.dp.data_stack.append(self.dp.read_mem(addr))
-            self.tick()
         elif opcode == Opcode.STORE:
             val = self.dp.data_stack.pop()
             addr = self.dp.data_stack.pop()
             self.dp.write_mem(addr, val)
-            self.tick()
 
         elif opcode == Opcode.ADD:
             b = self.dp.data_stack.pop()
@@ -142,7 +174,6 @@ class ControlUnit:
             result_u = a_u + b_u
             self.dp.update_add_flags(a_u, b_u, result_u)
             self.dp.data_stack.append(signed32(result_u & MASK32))
-            self.tick()
 
         elif opcode == Opcode.SUB:
             b = self.dp.data_stack.pop()
@@ -151,45 +182,38 @@ class ControlUnit:
             result = a_u - b_u
             self.dp.update_sub_flags(a_u, b_u, result)
             self.dp.data_stack.append(signed32(result & MASK32))
-            self.tick()
 
         elif opcode == Opcode.MUL:
             b = self.dp.data_stack.pop()
             a = self.dp.data_stack.pop()
             self.dp.data_stack.append(signed32(a * b))
-            self.tick()
 
         elif opcode == Opcode.DIV:
             b = self.dp.data_stack.pop()
             a = self.dp.data_stack.pop()
             res = int(a / b) if b != 0 else 0
             self.dp.data_stack.append(res)
-            self.tick()
 
         elif opcode == Opcode.MOD:
             b = self.dp.data_stack.pop()
             a = self.dp.data_stack.pop()
             res = (a - int(a / b) * b) if b != 0 else 0
             self.dp.data_stack.append(res)
-            self.tick()
 
         elif opcode == Opcode.CMP:
             b = self.dp.data_stack.pop()
             a = self.dp.data_stack.pop()
             self.dp.data_stack.append(1 if a == b else 0)
-            self.tick()
 
         elif opcode == Opcode.GT:
             b = self.dp.data_stack.pop()
             a = self.dp.data_stack.pop()
             self.dp.data_stack.append(1 if a > b else 0)
-            self.tick()
 
         elif opcode == Opcode.LT:
             b = self.dp.data_stack.pop()
             a = self.dp.data_stack.pop()
             self.dp.data_stack.append(1 if a < b else 0)
-            self.tick()
 
         elif opcode == Opcode.ADC:
             b = self.dp.data_stack.pop()
@@ -198,7 +222,6 @@ class ControlUnit:
             result_u = a_u + b_u + self.dp.carry
             self.dp.update_add_flags(a_u, b_u, result_u)
             self.dp.data_stack.append(signed32(result_u & MASK32))
-            self.tick()
 
         elif opcode == Opcode.SBB:
             b = self.dp.data_stack.pop()
@@ -207,7 +230,6 @@ class ControlUnit:
             result = a_u - b_u - self.dp.carry
             self.dp.update_sub_flags(a_u, b_u, result)
             self.dp.data_stack.append(signed32(result & MASK32))
-            self.tick()
 
         elif opcode == Opcode.MUL64:
             b = self.dp.data_stack.pop()
@@ -217,41 +239,33 @@ class ControlUnit:
             hi_bits = (full >> 32) & MASK32
             self.dp.data_stack.append(signed32(lo))
             self.dp.data_stack.append(signed32(hi_bits))
-            self.tick()
 
         elif opcode == Opcode.PUSH_CARRY:
             self.dp.data_stack.append(self.dp.carry)
-            self.tick()
-
         elif opcode == Opcode.PUSH_OVERFLOW:
             self.dp.data_stack.append(self.dp.overflow)
-            self.tick()
 
         elif opcode == Opcode.JMP:
             self.pc = instr.arg
-            self.tick()
         elif opcode == Opcode.JZ:
             val = self.dp.data_stack.pop()
             if val == 0:
                 self.pc = instr.arg
-            self.tick()
         elif opcode == Opcode.CALL:
             self.dp.return_stack.append(self.pc)
             self.pc = instr.arg
-            self.tick()
         elif opcode == Opcode.RET:
             self.pc = self.dp.return_stack.pop()
-            self.tick()
         elif opcode == Opcode.IRET:
             self.pc = self.dp.return_stack.pop()
             self.ie = True
-            self.tick()
         elif opcode == Opcode.STI:
             self.ie = True
-            self.tick()
 
         else:
             raise ValueError(f"Unknown opcode: {opcode!r} (PC={self.pc - 1})")
+
+        self.tick(_EXEC_TICKS.get(opcode, 1))
 
 
 def load_schedule(filename: str | None) -> list[tuple[int, str]]:
@@ -303,8 +317,6 @@ def main() -> None:
             cu.decode_and_execute()
     except Exception as e:
         logging.error(f"Aborted: {e}")
-
-    logging.info(f"Ticks: {cu.tick_counter}")
 
     print("Output:", "".join(dp.output_buffer))
 
