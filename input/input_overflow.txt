@@ -1,0 +1,10 @@
+# Demonstrate single-register input: chars arrive 2 ticks apart.
+# 'h' lands at tick 5.
+# 'e','l','l','o' arrive while the register still holds 'h' -> all dropped.
+# Only 'h' is ever processed.
+5 h
+7 e
+9 l
+11 l
+13 o
+1000 \0

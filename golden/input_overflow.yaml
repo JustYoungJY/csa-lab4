@@ -1,0 +1,257 @@
+source_file: programs/cat.lisp
+in_source: |-
+  ; cat: echo every input byte to output
+
+  (defisr
+    (setq c (read))
+    (if (!= c 0)
+      (print-char c)
+      (halt)))
+
+  (loop 1 0)
+input_file: input/input_overflow.txt
+in_stdin: |-
+  # Demonstrate single-register input: chars arrive 2 ticks apart.
+  # 'h' lands at tick 5.
+  # 'e','l','l','o' arrive while the register still holds 'h' -> all dropped.
+  # Only 'h' is ever processed.
+  5 h
+  7 e
+  9 l
+  11 l
+  13 o
+  1000 \0
+out_stdout: |-
+  h
+out_code_hex: |-
+  0000 - 0D00000A - jmp 10
+  0001 - 01000000 - push 0
+  0002 - 1A000000 - sti
+  0003 - 01000000 - push 0
+  0004 - 01000001 - push 1
+  0005 - 0E000009 - jz 9
+  0006 - 02000000 - pop
+  0007 - 01000000 - push 0
+  0008 - 0D000004 - jmp 4
+  0009 - 12000000 - halt
+  0010 - 01000400 - push 1024
+  0011 - 13000FF1 - push_m 4081
+  0012 - 04000000 - store
+  0013 - 13000400 - push_m 1024
+  0014 - 02000000 - pop
+  0015 - 13000400 - push_m 1024
+  0016 - 01000000 - push 0
+  0017 - 0A000000 - cmp
+  0018 - 01000000 - push 0
+  0019 - 0A000000 - cmp
+  0020 - 0E00001A - jz 26
+  0021 - 01000FF0 - push 4080
+  0022 - 13000400 - push_m 1024
+  0023 - 04000000 - store
+  0024 - 01000000 - push 0
+  0025 - 0D00001C - jmp 28
+  0026 - 12000000 - halt
+  0027 - 01000000 - push 0
+  0028 - 02000000 - pop
+  0029 - 11000000 - iret
+out_log: |-
+  TICK: 0003 | PC: 0001 | OP: push 0         | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0007 | PC: 0002 | OP: sti            | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0014 | PC: 0000 | OP: jmp 10         | TOS:            0 | DS: 1 | RS: 1 | C: 0 | V: 0
+  TICK: 0018 | PC: 0010 | OP: push 1024      | TOS:            0 | DS: 1 | RS: 1 | C: 0 | V: 0
+  TICK: 0022 | PC: 0011 | OP: push_m 4081    | TOS:         1024 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0028 | PC: 0012 | OP: store          | TOS:          104 | DS: 3 | RS: 1 | C: 0 | V: 0
+  TICK: 0034 | PC: 0013 | OP: push_m 1024    | TOS:            0 | DS: 1 | RS: 1 | C: 0 | V: 0
+  TICK: 0040 | PC: 0014 | OP: pop            | TOS:          104 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0044 | PC: 0015 | OP: push_m 1024    | TOS:            0 | DS: 1 | RS: 1 | C: 0 | V: 0
+  TICK: 0050 | PC: 0016 | OP: push 0         | TOS:          104 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0054 | PC: 0017 | OP: cmp            | TOS:            0 | DS: 3 | RS: 1 | C: 0 | V: 0
+  TICK: 0058 | PC: 0018 | OP: push 0         | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0062 | PC: 0019 | OP: cmp            | TOS:            0 | DS: 3 | RS: 1 | C: 0 | V: 0
+  TICK: 0066 | PC: 0020 | OP: jz 26          | TOS:            1 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0070 | PC: 0021 | OP: push 4080      | TOS:            0 | DS: 1 | RS: 1 | C: 0 | V: 0
+  TICK: 0074 | PC: 0022 | OP: push_m 1024    | TOS:         4080 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0080 | PC: 0023 | OP: store          | TOS:          104 | DS: 3 | RS: 1 | C: 0 | V: 0
+  TICK: 0086 | PC: 0024 | OP: push 0         | TOS:            0 | DS: 1 | RS: 1 | C: 0 | V: 0
+  TICK: 0090 | PC: 0025 | OP: jmp 28         | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0094 | PC: 0028 | OP: pop            | TOS:            0 | DS: 2 | RS: 1 | C: 0 | V: 0
+  TICK: 0098 | PC: 0029 | OP: iret           | TOS:            0 | DS: 1 | RS: 1 | C: 0 | V: 0
+  TICK: 0102 | PC: 0003 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0106 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0110 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0114 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0118 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0122 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0126 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0130 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0134 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0138 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0142 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0146 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0150 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0154 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0158 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0162 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0166 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0170 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0174 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0178 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0182 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0186 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0190 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0194 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0198 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0202 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0206 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0210 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0214 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0218 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0222 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0226 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0230 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0234 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0238 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0242 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0246 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0250 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0254 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0258 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0262 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0266 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0270 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0274 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0278 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0282 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0286 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0290 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0294 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0298 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0302 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0306 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0310 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0314 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0318 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0322 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0326 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0330 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0334 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0338 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0342 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0346 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0350 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0354 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0358 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0362 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0366 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0370 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0374 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0378 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0382 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0386 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0390 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0394 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0398 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0402 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0406 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0410 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0414 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0418 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0422 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0426 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0430 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0434 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0438 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0442 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0446 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0450 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0454 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0458 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0462 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0466 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0470 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0474 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0478 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0482 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0486 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0490 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0494 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0498 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0502 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0506 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0510 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0514 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0518 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0522 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0526 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0530 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0534 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0538 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0542 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0546 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0550 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0554 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0558 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0562 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0566 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0570 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0574 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0578 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0582 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0586 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0590 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0594 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0598 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0602 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0606 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0610 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0614 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0618 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0622 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0626 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0630 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0634 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0638 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0642 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0646 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0650 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0654 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0658 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0662 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0666 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0670 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0674 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0678 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0682 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0686 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0690 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0694 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0698 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0702 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0706 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0710 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0714 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0718 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0722 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0726 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0730 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0734 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0738 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0742 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0746 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0750 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0754 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0758 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0762 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0766 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0770 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0774 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0778 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0782 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0786 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0790 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0794 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0798 | PC: 0007 | OP: push 0         | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0802 | PC: 0008 | OP: jmp 4          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0806 | PC: 0004 | OP: push 1         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0810 | PC: 0005 | OP: jz 9           | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0814 | PC: 0006 | OP: pop            | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
