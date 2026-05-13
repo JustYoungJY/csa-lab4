@@ -13,14 +13,77 @@
 ### Синтаксис (БНФ)
 
 ```bnf
-program     ::= expression*
-expression  ::= atom | list
-list        ::= "(" head expression* ")"
-head        ::= identifier
-atom        ::= number | string | identifier
-number      ::= ["-"]? [0-9]+
-string      ::= '"' [^"]* '"'
-identifier  ::= [a-zA-Z_][a-zA-Z0-9_\-+*/=<>!?]*
+program         ::= top-form*
+
+top-form        ::= defisr-form
+                  | expr
+
+defisr-form     ::= "(" "defisr" expr+ ")"
+
+; Выражения
+expr            ::= literal
+                  | variable
+                  | setq-form
+                  | if-form
+                  | progn-form
+                  | loop-form
+                  | defun-form
+                  | arith-form
+                  | cmp-form
+                  | not-form
+                  | load-form
+                  | store-form
+                  | read-form
+                  | print-form
+                  | halt-form
+                  | int64-form
+                  | call-form
+
+; Управление выполнением
+setq-form       ::= "(" "setq"  identifier expr ")"
+if-form         ::= "(" "if"    expr expr expr? ")"
+progn-form      ::= "(" "progn" expr* ")"
+loop-form       ::= "(" "loop"  expr expr ")"
+defun-form      ::= "(" "defun" identifier "(" identifier* ")" expr+ ")"
+
+; Арифметика
+arith-form      ::= "(" arith-op expr expr ")"
+arith-op        ::= "+" | "-" | "*" | "/" | "mod"
+
+; Сравнение
+cmp-form        ::= "(" cmp-op expr expr ")"
+cmp-op          ::= "=" | "!=" | "<" | ">" | "<=" | ">="
+
+not-form        ::= "(" "not" expr ")"
+
+; Работа с памятью
+load-form       ::= "(" "load" expr ")"
+store-form      ::= "(" "store-at" expr expr ")"
+
+; Ввод-вывод 
+read-form       ::= "(" "read" ")"
+print-form      ::= "(" "print-char" expr ")"
+                  | "(" "print-int" expr ")"
+                  | "(" "print-int64" expr expr ")"
+halt-form       ::= "(" "halt" ")"
+
+; 64-битная арифметика 
+int64-form      ::= "(" "adc" expr expr ")"
+                  | "(" "sbb" expr expr ")"
+                  | "(" "mul64" expr expr identifier identifier ")"
+                  | "(" "push-carry" ")"
+                  | "(" "push-overflow" ")"
+
+; Вызов функции 
+call-form       ::= "(" identifier expr* ")"
+
+; Атомарные значения
+literal         ::= number | string
+variable        ::= identifier
+
+number          ::= "-"? [0-9]+
+string          ::= '"' [^"]* '"'
+identifier      ::= [a-zA-Z_] [a-zA-Z0-9_\-+*/=<>!?]*
 ```
 
 ### Семантика
