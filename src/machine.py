@@ -297,6 +297,7 @@ class ControlUnit:
                 return
             self.exec_ticks_left -= 1
             if self.exec_ticks_left == 0:
+                assert self.ir is not None, "IR must be set before EXEC phase"
                 self._execute(self.ir)
                 self.phase = "FETCH1"
 
