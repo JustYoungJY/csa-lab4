@@ -379,12 +379,12 @@ end_label:
 
 ### DataPath
 
-![DataPath](static/DataPathWithBackground.png)
+![DataPath](static/DataPath.png)
 
 
 ### ControlUnit
 
-![ControlUnit](static/ControlUnitWithBackground.png)
+![ControlUnit](static/ControlUnit.png)
 
 
 **Один такт симуляции (`single_tick`):**
