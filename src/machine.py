@@ -13,7 +13,7 @@ PORT_OUT_INT64_LO = 4084
 
 MASK32 = 0xFFFFFFFF
 
-FETCH_TICKS = 3
+FETCH_TICKS = 2
 
 _EXEC_TICKS: dict[Opcode, int] = {
     Opcode.PUSH: 1,
@@ -111,40 +111,37 @@ class ControlUnit:
         self.schedule: list[tuple[int, str]] = io_schedule
 
         self.ie: bool = False
-        self.irq: bool = False
         self.halted: bool = False
 
-    def tick(self, n: int = 1) -> None:
-        for _ in range(n):
-            self.tick_counter += 1
-            if self.schedule and self.tick_counter >= self.schedule[0][0]:
-                _, char = self.schedule.pop(0)
-                if self.dp.input_reg is None:
-                    self.dp.input_reg = char
-                # else: register occupied. New character is silently dropped
+        self.phase: str = "FETCH1"  # "FETCH1" | "FETCH2" | "EXEC"
+        self.ar: int = 0
+        self.ir: Instruction | None = None
+        self.instr_pc: int = 1  # PC recorded at the start of FETCH1
+        self.exec_ticks_left: int = 0  # remaining execute ticks for current instruction
 
-    def decode_and_execute(self) -> None:
-        self.tick()
-        self.irq = self.dp.input_reg is not None
-        if self.ie and self.irq:
-            self.tick(FETCH_TICKS - 1)
-            self.dp.return_stack.append(self.pc)
-            self.pc = 0
-            self.ie = False
-            self.irq = False
-            return
+    def _deliver_io(self) -> None:
+        """Place scheduled characters in input_reg if their tick has arrived."""
+        while self.schedule and self.tick_counter >= self.schedule[0][0]:
+            _, char = self.schedule.pop(0)
+            if self.dp.input_reg is None:
+                self.dp.input_reg = char
+            # else: register occupied — character silently dropped
 
-        self.tick(FETCH_TICKS - 1)
-        machine_word = self.dp.read_mem(self.pc)
-        instr = Instruction.decode(struct.pack(">I", machine_word))
-        self.pc += 1
-
+    def _handle_interrupt(self) -> None:
+        """Fire an interrupt: push instr_pc onto RS, jump to vector 0, disable IE."""
         logging.info(
-            f"TICK: {self.tick_counter:04} | PC: {self.pc - 1:04} | OP: {instr!s:<14} | "
+            f"TICK: {self.tick_counter:04} | INTERRUPT | saved PC: {self.instr_pc:<8} | "
             f"TOS: {self.dp.get_tos():12} | DS: {len(self.dp.data_stack)} | "
-            f"RS: {len(self.dp.return_stack)} | C: {self.dp.carry} | V: {self.dp.overflow}"
+            f"RS: {len(self.dp.return_stack) + 1}"
         )
+        self.dp.return_stack.append(self.instr_pc)
+        self.pc = 0
+        self.ie = False
+        self.phase = "FETCH1"
+        self.exec_ticks_left = 0
 
+    def _execute(self, instr: Instruction) -> None:
+        """Perform the semantic operation of instr."""
         opcode = instr.opcode
 
         if opcode == Opcode.HALT:
@@ -263,9 +260,48 @@ class ControlUnit:
             self.ie = True
 
         else:
-            raise ValueError(f"Unknown opcode: {opcode!r} (PC={self.pc - 1})")
+            raise ValueError(f"Unknown opcode: {opcode!r} at instr_pc={self.instr_pc}")
 
-        self.tick(_EXEC_TICKS.get(opcode, 1))
+    def single_tick(self) -> None:
+        self.tick_counter += 1
+        self._deliver_io()
+
+        irq = self.dp.input_reg is not None
+
+        if self.phase == "FETCH1":
+            self.instr_pc = self.pc
+            if self.ie and irq:
+                self._handle_interrupt()
+                return
+            self.ar = self.pc
+            self.phase = "FETCH2"
+
+        elif self.phase == "FETCH2":
+            if self.ie and irq:
+                self._handle_interrupt()
+                return
+            machine_word = self.dp.memory[self.ar]
+            self.ir = Instruction.decode(struct.pack(">I", machine_word))
+            self.pc += 1
+            self.exec_ticks_left = _EXEC_TICKS.get(self.ir.opcode, 1)
+            logging.info(
+                f"TICK: {self.tick_counter:04} | PC: {self.instr_pc:04}  | OP: {self.ir!s:<14} | "
+                f"TOS: {self.dp.get_tos():12} | DS: {len(self.dp.data_stack)} | "
+                f"RS: {len(self.dp.return_stack)} | C: {self.dp.carry} | V: {self.dp.overflow}"
+            )
+            self.phase = "EXEC"
+
+        elif self.phase == "EXEC":
+            if self.ie and irq:
+                self._handle_interrupt()
+                return
+            self.exec_ticks_left -= 1
+            if self.exec_ticks_left == 0:
+                self._execute(self.ir)
+                self.phase = "FETCH1"
+
+        else:
+            raise RuntimeError(f"Unknown phase: {self.phase!r}")
 
 
 def load_schedule(filename: str | None) -> list[tuple[int, str]]:
@@ -314,7 +350,7 @@ def main() -> None:
 
     try:
         while not cu.halted:
-            cu.decode_and_execute()
+            cu.single_tick()
     except Exception as e:
         logging.error(f"Aborted: {e}")
 
