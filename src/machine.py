@@ -113,13 +113,13 @@ class ControlUnit:
         self.ie: bool = False
         self.halted: bool = False
 
-        self.phase: str = "FETCH1"          # "FETCH1" | "FETCH2" | "EXEC"
+        self.phase: str = "FETCH1"  # "FETCH1" | "FETCH2" | "EXEC"
         self.ar: int = 0
         self.ir: Instruction | None = None
-        self.instr_pc: int = 1               # PC recorded at the start of FETCH1
-        self.exec_ticks_left: int = 0        # remaining execute ticks for current instruction
-        self.exec_total: int = 0             # total execute ticks for current instruction
-        self.exec_tick_num: int = 0          # 1-based current execute tick number
+        self.instr_pc: int = 1  # PC recorded at the start of FETCH1
+        self.exec_ticks_left: int = 0  # remaining execute ticks for current instruction
+        self.exec_total: int = 0  # total execute ticks for current instruction
+        self.exec_tick_num: int = 0  # 1-based current execute tick number
 
     def _deliver_io(self) -> None:
         """Place scheduled characters in input_reg if their tick has arrived."""
