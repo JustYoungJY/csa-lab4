@@ -241,203 +241,203 @@ out_code_hex: |-
   0179 - 12000000 - halt
   0180 - 11000000 - iret
 out_log: |-
-  TICK: 0002 | PC: 0001  | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0005 | PC: 0002  | OP: push 1         | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0008 | PC: 0003  | OP: store          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0013 | PC: 0004  | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0018 | PC: 0005  | OP: pop            | TOS:            1 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0021 | PC: 0006  | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0024 | PC: 0007  | OP: push 0         | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0027 | PC: 0008  | OP: store          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0032 | PC: 0009  | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0037 | PC: 0010  | OP: pop            | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0040 | PC: 0011  | OP: push 0         | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0043 | PC: 0012  | OP: push_m 1024    | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0048 | PC: 0013  | OP: push 10        | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0051 | PC: 0014  | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0054 | PC: 0015  | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0057 | PC: 0016  | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0060 | PC: 0017  | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0063 | PC: 0018  | OP: pop            | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0066 | PC: 0019  | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0069 | PC: 0020  | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0074 | PC: 0021  | OP: push_m 1024    | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0079 | PC: 0022  | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0082 | PC: 0023  | OP: store          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0087 | PC: 0024  | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0092 | PC: 0025  | OP: pop            | TOS:            1 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0095 | PC: 0026  | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0098 | PC: 0027  | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0103 | PC: 0028  | OP: push 1         | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0106 | PC: 0029  | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0109 | PC: 0030  | OP: store          | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0114 | PC: 0031  | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0119 | PC: 0032  | OP: jmp 12         | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0122 | PC: 0012  | OP: push_m 1024    | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0127 | PC: 0013  | OP: push 10        | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0130 | PC: 0014  | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0133 | PC: 0015  | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0136 | PC: 0016  | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0139 | PC: 0017  | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0142 | PC: 0018  | OP: pop            | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0145 | PC: 0019  | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0148 | PC: 0020  | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0153 | PC: 0021  | OP: push_m 1024    | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0158 | PC: 0022  | OP: add            | TOS:            2 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0161 | PC: 0023  | OP: store          | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0166 | PC: 0024  | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0171 | PC: 0025  | OP: pop            | TOS:            3 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0174 | PC: 0026  | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0177 | PC: 0027  | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0182 | PC: 0028  | OP: push 1         | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0185 | PC: 0029  | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0188 | PC: 0030  | OP: store          | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0193 | PC: 0031  | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0198 | PC: 0032  | OP: jmp 12         | TOS:            3 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0201 | PC: 0012  | OP: push_m 1024    | TOS:            3 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0206 | PC: 0013  | OP: push 10        | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0209 | PC: 0014  | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0212 | PC: 0015  | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0215 | PC: 0016  | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0218 | PC: 0017  | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0221 | PC: 0018  | OP: pop            | TOS:            3 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0224 | PC: 0019  | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0227 | PC: 0020  | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0232 | PC: 0021  | OP: push_m 1024    | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0237 | PC: 0022  | OP: add            | TOS:            3 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0240 | PC: 0023  | OP: store          | TOS:            6 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0245 | PC: 0024  | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0250 | PC: 0025  | OP: pop            | TOS:            6 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0253 | PC: 0026  | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0256 | PC: 0027  | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0261 | PC: 0028  | OP: push 1         | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0264 | PC: 0029  | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0267 | PC: 0030  | OP: store          | TOS:            4 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0272 | PC: 0031  | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0277 | PC: 0032  | OP: jmp 12         | TOS:            4 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0280 | PC: 0012  | OP: push_m 1024    | TOS:            4 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0285 | PC: 0013  | OP: push 10        | TOS:            4 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0288 | PC: 0014  | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0291 | PC: 0015  | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0294 | PC: 0016  | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0297 | PC: 0017  | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0300 | PC: 0018  | OP: pop            | TOS:            4 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0303 | PC: 0019  | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0306 | PC: 0020  | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0311 | PC: 0021  | OP: push_m 1024    | TOS:            6 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0316 | PC: 0022  | OP: add            | TOS:            4 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0319 | PC: 0023  | OP: store          | TOS:           10 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0324 | PC: 0024  | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0329 | PC: 0025  | OP: pop            | TOS:           10 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0332 | PC: 0026  | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0335 | PC: 0027  | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0340 | PC: 0028  | OP: push 1         | TOS:            4 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0343 | PC: 0029  | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0346 | PC: 0030  | OP: store          | TOS:            5 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0351 | PC: 0031  | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0356 | PC: 0032  | OP: jmp 12         | TOS:            5 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0359 | PC: 0012  | OP: push_m 1024    | TOS:            5 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0364 | PC: 0013  | OP: push 10        | TOS:            5 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0367 | PC: 0014  | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0370 | PC: 0015  | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0373 | PC: 0016  | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0376 | PC: 0017  | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0379 | PC: 0018  | OP: pop            | TOS:            5 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0382 | PC: 0019  | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0385 | PC: 0020  | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0390 | PC: 0021  | OP: push_m 1024    | TOS:           10 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0395 | PC: 0022  | OP: add            | TOS:            5 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0398 | PC: 0023  | OP: store          | TOS:           15 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0403 | PC: 0024  | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0408 | PC: 0025  | OP: pop            | TOS:           15 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0411 | PC: 0026  | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0414 | PC: 0027  | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0419 | PC: 0028  | OP: push 1         | TOS:            5 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0422 | PC: 0029  | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0425 | PC: 0030  | OP: store          | TOS:            6 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0430 | PC: 0031  | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0435 | PC: 0032  | OP: jmp 12         | TOS:            6 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0438 | PC: 0012  | OP: push_m 1024    | TOS:            6 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0443 | PC: 0013  | OP: push 10        | TOS:            6 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0446 | PC: 0014  | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0449 | PC: 0015  | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0452 | PC: 0016  | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0455 | PC: 0017  | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0458 | PC: 0018  | OP: pop            | TOS:            6 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0461 | PC: 0019  | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0464 | PC: 0020  | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0469 | PC: 0021  | OP: push_m 1024    | TOS:           15 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0474 | PC: 0022  | OP: add            | TOS:            6 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0477 | PC: 0023  | OP: store          | TOS:           21 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0482 | PC: 0024  | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0487 | PC: 0025  | OP: pop            | TOS:           21 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0490 | PC: 0026  | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0493 | PC: 0027  | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0498 | PC: 0028  | OP: push 1         | TOS:            6 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0501 | PC: 0029  | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0504 | PC: 0030  | OP: store          | TOS:            7 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0509 | PC: 0031  | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0514 | PC: 0032  | OP: jmp 12         | TOS:            7 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0517 | PC: 0012  | OP: push_m 1024    | TOS:            7 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0522 | PC: 0013  | OP: push 10        | TOS:            7 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0525 | PC: 0014  | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0528 | PC: 0015  | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0531 | PC: 0016  | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0534 | PC: 0017  | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0537 | PC: 0018  | OP: pop            | TOS:            7 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0540 | PC: 0019  | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0543 | PC: 0020  | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0548 | PC: 0021  | OP: push_m 1024    | TOS:           21 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0553 | PC: 0022  | OP: add            | TOS:            7 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0556 | PC: 0023  | OP: store          | TOS:           28 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0561 | PC: 0024  | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0566 | PC: 0025  | OP: pop            | TOS:           28 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0569 | PC: 0026  | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0572 | PC: 0027  | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0577 | PC: 0028  | OP: push 1         | TOS:            7 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0580 | PC: 0029  | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0583 | PC: 0030  | OP: store          | TOS:            8 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0588 | PC: 0031  | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0593 | PC: 0032  | OP: jmp 12         | TOS:            8 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0596 | PC: 0012  | OP: push_m 1024    | TOS:            8 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0601 | PC: 0013  | OP: push 10        | TOS:            8 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0604 | PC: 0014  | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0607 | PC: 0015  | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0610 | PC: 0016  | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0613 | PC: 0017  | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0616 | PC: 0018  | OP: pop            | TOS:            8 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0619 | PC: 0019  | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0622 | PC: 0020  | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0627 | PC: 0021  | OP: push_m 1024    | TOS:           28 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0632 | PC: 0022  | OP: add            | TOS:            8 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0635 | PC: 0023  | OP: store          | TOS:           36 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0640 | PC: 0024  | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0645 | PC: 0025  | OP: pop            | TOS:           36 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0648 | PC: 0026  | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0651 | PC: 0027  | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0656 | PC: 0028  | OP: push 1         | TOS:            8 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0659 | PC: 0029  | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0662 | PC: 0030  | OP: store          | TOS:            9 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0667 | PC: 0031  | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0672 | PC: 0032  | OP: jmp 12         | TOS:            9 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0675 | PC: 0012  | OP: push_m 1024    | TOS:            9 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0680 | PC: 0013  | OP: push 10        | TOS:            9 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0683 | PC: 0014  | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0686 | PC: 0015  | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0689 | PC: 0016  | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0692 | PC: 0017  | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0695 | PC: 0018  | OP: pop            | TOS:            9 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0698 | PC: 0019  | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0701 | PC: 0020  | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0706 | PC: 0021  | OP: push_m 1024    | TOS:           36 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0711 | PC: 0022  | OP: add            | TOS:            9 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0714 | PC: 0023  | OP: store          | TOS:           45 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0719 | PC: 0024  | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0724 | PC: 0025  | OP: pop            | TOS:           45 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0727 | PC: 0026  | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0730 | PC: 0027  | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
-  TICK: 0735 | PC: 0028  | OP: push 1         | TOS:            9 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0738 | PC: 0029  | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
-  TICK: 0741 | PC: 0030  | OP: store          | TOS:           10 | DS: 2 | RS: 0 | C: 0 | V: 0
-  TICK: 0746 | PC: 0031  | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
-  TICK: 0751 | PC: 0032  | OP: jmp 12         | TOS:           10 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0001 | FETCH1     | PC: 0001 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0002 | FETCH2     | PC: 0001 | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0003 | EXEC 1/1   | PC: 0001 | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0004 | FETCH1     | PC: 0002 |                    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0005 | FETCH2     | PC: 0002 | OP: push 1         | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0006 | EXEC 1/1   | PC: 0002 | OP: push 1         | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0007 | FETCH1     | PC: 0003 |                    | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0008 | FETCH2     | PC: 0003 | OP: store          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0009 | EXEC 1/3   | PC: 0003 | OP: store          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0010 | EXEC 2/3   | PC: 0003 | OP: store          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0011 | EXEC 3/3   | PC: 0003 | OP: store          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0012 | FETCH1     | PC: 0004 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0013 | FETCH2     | PC: 0004 | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0014 | EXEC 1/3   | PC: 0004 | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0015 | EXEC 2/3   | PC: 0004 | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0016 | EXEC 3/3   | PC: 0004 | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0017 | FETCH1     | PC: 0005 |                    | TOS:            1 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0018 | FETCH2     | PC: 0005 | OP: pop            | TOS:            1 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0019 | EXEC 1/1   | PC: 0005 | OP: pop            | TOS:            1 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0020 | FETCH1     | PC: 0006 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0021 | FETCH2     | PC: 0006 | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0022 | EXEC 1/1   | PC: 0006 | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0023 | FETCH1     | PC: 0007 |                    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0024 | FETCH2     | PC: 0007 | OP: push 0         | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0025 | EXEC 1/1   | PC: 0007 | OP: push 0         | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0026 | FETCH1     | PC: 0008 |                    | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0027 | FETCH2     | PC: 0008 | OP: store          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0028 | EXEC 1/3   | PC: 0008 | OP: store          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0029 | EXEC 2/3   | PC: 0008 | OP: store          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0030 | EXEC 3/3   | PC: 0008 | OP: store          | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0031 | FETCH1     | PC: 0009 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0032 | FETCH2     | PC: 0009 | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0033 | EXEC 1/3   | PC: 0009 | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0034 | EXEC 2/3   | PC: 0009 | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0035 | EXEC 3/3   | PC: 0009 | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0036 | FETCH1     | PC: 0010 |                    | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0037 | FETCH2     | PC: 0010 | OP: pop            | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0038 | EXEC 1/1   | PC: 0010 | OP: pop            | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0039 | FETCH1     | PC: 0011 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0040 | FETCH2     | PC: 0011 | OP: push 0         | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0041 | EXEC 1/1   | PC: 0011 | OP: push 0         | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0042 | FETCH1     | PC: 0012 |                    | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0043 | FETCH2     | PC: 0012 | OP: push_m 1024    | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0044 | EXEC 1/3   | PC: 0012 | OP: push_m 1024    | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0045 | EXEC 2/3   | PC: 0012 | OP: push_m 1024    | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0046 | EXEC 3/3   | PC: 0012 | OP: push_m 1024    | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0047 | FETCH1     | PC: 0013 |                    | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0048 | FETCH2     | PC: 0013 | OP: push 10        | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0049 | EXEC 1/1   | PC: 0013 | OP: push 10        | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0050 | FETCH1     | PC: 0014 |                    | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0051 | FETCH2     | PC: 0014 | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0052 | EXEC 1/1   | PC: 0014 | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0053 | FETCH1     | PC: 0015 |                    | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0054 | FETCH2     | PC: 0015 | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0055 | EXEC 1/1   | PC: 0015 | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0056 | FETCH1     | PC: 0016 |                    | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0057 | FETCH2     | PC: 0016 | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0058 | EXEC 1/1   | PC: 0016 | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0059 | FETCH1     | PC: 0017 |                    | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0060 | FETCH2     | PC: 0017 | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0061 | EXEC 1/1   | PC: 0017 | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0062 | FETCH1     | PC: 0018 |                    | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0063 | FETCH2     | PC: 0018 | OP: pop            | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0064 | EXEC 1/1   | PC: 0018 | OP: pop            | TOS:            0 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0065 | FETCH1     | PC: 0019 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0066 | FETCH2     | PC: 0019 | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0067 | EXEC 1/1   | PC: 0019 | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0068 | FETCH1     | PC: 0020 |                    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0069 | FETCH2     | PC: 0020 | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0070 | EXEC 1/3   | PC: 0020 | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0071 | EXEC 2/3   | PC: 0020 | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0072 | EXEC 3/3   | PC: 0020 | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0073 | FETCH1     | PC: 0021 |                    | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0074 | FETCH2     | PC: 0021 | OP: push_m 1024    | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0075 | EXEC 1/3   | PC: 0021 | OP: push_m 1024    | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0076 | EXEC 2/3   | PC: 0021 | OP: push_m 1024    | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0077 | EXEC 3/3   | PC: 0021 | OP: push_m 1024    | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0078 | FETCH1     | PC: 0022 |                    | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0079 | FETCH2     | PC: 0022 | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0080 | EXEC 1/1   | PC: 0022 | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0081 | FETCH1     | PC: 0023 |                    | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0082 | FETCH2     | PC: 0023 | OP: store          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0083 | EXEC 1/3   | PC: 0023 | OP: store          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0084 | EXEC 2/3   | PC: 0023 | OP: store          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0085 | EXEC 3/3   | PC: 0023 | OP: store          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0086 | FETCH1     | PC: 0024 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0087 | FETCH2     | PC: 0024 | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0088 | EXEC 1/3   | PC: 0024 | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0089 | EXEC 2/3   | PC: 0024 | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0090 | EXEC 3/3   | PC: 0024 | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0091 | FETCH1     | PC: 0025 |                    | TOS:            1 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0092 | FETCH2     | PC: 0025 | OP: pop            | TOS:            1 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0093 | EXEC 1/1   | PC: 0025 | OP: pop            | TOS:            1 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0094 | FETCH1     | PC: 0026 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0095 | FETCH2     | PC: 0026 | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0096 | EXEC 1/1   | PC: 0026 | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0097 | FETCH1     | PC: 0027 |                    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0098 | FETCH2     | PC: 0027 | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0099 | EXEC 1/3   | PC: 0027 | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0100 | EXEC 2/3   | PC: 0027 | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0101 | EXEC 3/3   | PC: 0027 | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0102 | FETCH1     | PC: 0028 |                    | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0103 | FETCH2     | PC: 0028 | OP: push 1         | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0104 | EXEC 1/1   | PC: 0028 | OP: push 1         | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0105 | FETCH1     | PC: 0029 |                    | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0106 | FETCH2     | PC: 0029 | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0107 | EXEC 1/1   | PC: 0029 | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0108 | FETCH1     | PC: 0030 |                    | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0109 | FETCH2     | PC: 0030 | OP: store          | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0110 | EXEC 1/3   | PC: 0030 | OP: store          | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0111 | EXEC 2/3   | PC: 0030 | OP: store          | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0112 | EXEC 3/3   | PC: 0030 | OP: store          | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0113 | FETCH1     | PC: 0031 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0114 | FETCH2     | PC: 0031 | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0115 | EXEC 1/3   | PC: 0031 | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0116 | EXEC 2/3   | PC: 0031 | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0117 | EXEC 3/3   | PC: 0031 | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0118 | FETCH1     | PC: 0032 |                    | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0119 | FETCH2     | PC: 0032 | OP: jmp 12         | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0120 | EXEC 1/1   | PC: 0032 | OP: jmp 12         | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0121 | FETCH1     | PC: 0012 |                    | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0122 | FETCH2     | PC: 0012 | OP: push_m 1024    | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0123 | EXEC 1/3   | PC: 0012 | OP: push_m 1024    | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0124 | EXEC 2/3   | PC: 0012 | OP: push_m 1024    | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0125 | EXEC 3/3   | PC: 0012 | OP: push_m 1024    | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0126 | FETCH1     | PC: 0013 |                    | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0127 | FETCH2     | PC: 0013 | OP: push 10        | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0128 | EXEC 1/1   | PC: 0013 | OP: push 10        | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0129 | FETCH1     | PC: 0014 |                    | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0130 | FETCH2     | PC: 0014 | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0131 | EXEC 1/1   | PC: 0014 | OP: gt             | TOS:           10 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0132 | FETCH1     | PC: 0015 |                    | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0133 | FETCH2     | PC: 0015 | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0134 | EXEC 1/1   | PC: 0015 | OP: push 0         | TOS:            0 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0135 | FETCH1     | PC: 0016 |                    | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0136 | FETCH2     | PC: 0016 | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0137 | EXEC 1/1   | PC: 0016 | OP: cmp            | TOS:            0 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0138 | FETCH1     | PC: 0017 |                    | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0139 | FETCH2     | PC: 0017 | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0140 | EXEC 1/1   | PC: 0017 | OP: jz 33          | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0141 | FETCH1     | PC: 0018 |                    | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0142 | FETCH2     | PC: 0018 | OP: pop            | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0143 | EXEC 1/1   | PC: 0018 | OP: pop            | TOS:            2 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0144 | FETCH1     | PC: 0019 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0145 | FETCH2     | PC: 0019 | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0146 | EXEC 1/1   | PC: 0019 | OP: push 1025      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0147 | FETCH1     | PC: 0020 |                    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0148 | FETCH2     | PC: 0020 | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0149 | EXEC 1/3   | PC: 0020 | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0150 | EXEC 2/3   | PC: 0020 | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0151 | EXEC 3/3   | PC: 0020 | OP: push_m 1025    | TOS:         1025 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0152 | FETCH1     | PC: 0021 |                    | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0153 | FETCH2     | PC: 0021 | OP: push_m 1024    | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0154 | EXEC 1/3   | PC: 0021 | OP: push_m 1024    | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0155 | EXEC 2/3   | PC: 0021 | OP: push_m 1024    | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0156 | EXEC 3/3   | PC: 0021 | OP: push_m 1024    | TOS:            1 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0157 | FETCH1     | PC: 0022 |                    | TOS:            2 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0158 | FETCH2     | PC: 0022 | OP: add            | TOS:            2 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0159 | EXEC 1/1   | PC: 0022 | OP: add            | TOS:            2 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0160 | FETCH1     | PC: 0023 |                    | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0161 | FETCH2     | PC: 0023 | OP: store          | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0162 | EXEC 1/3   | PC: 0023 | OP: store          | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0163 | EXEC 2/3   | PC: 0023 | OP: store          | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0164 | EXEC 3/3   | PC: 0023 | OP: store          | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0165 | FETCH1     | PC: 0024 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0166 | FETCH2     | PC: 0024 | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0167 | EXEC 1/3   | PC: 0024 | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0168 | EXEC 2/3   | PC: 0024 | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0169 | EXEC 3/3   | PC: 0024 | OP: push_m 1025    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0170 | FETCH1     | PC: 0025 |                    | TOS:            3 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0171 | FETCH2     | PC: 0025 | OP: pop            | TOS:            3 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0172 | EXEC 1/1   | PC: 0025 | OP: pop            | TOS:            3 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0173 | FETCH1     | PC: 0026 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0174 | FETCH2     | PC: 0026 | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0175 | EXEC 1/1   | PC: 0026 | OP: push 1024      | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0176 | FETCH1     | PC: 0027 |                    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0177 | FETCH2     | PC: 0027 | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0178 | EXEC 1/3   | PC: 0027 | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0179 | EXEC 2/3   | PC: 0027 | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0180 | EXEC 3/3   | PC: 0027 | OP: push_m 1024    | TOS:         1024 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0181 | FETCH1     | PC: 0028 |                    | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0182 | FETCH2     | PC: 0028 | OP: push 1         | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0183 | EXEC 1/1   | PC: 0028 | OP: push 1         | TOS:            2 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0184 | FETCH1     | PC: 0029 |                    | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0185 | FETCH2     | PC: 0029 | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0186 | EXEC 1/1   | PC: 0029 | OP: add            | TOS:            1 | DS: 3 | RS: 0 | C: 0 | V: 0
+  TICK: 0187 | FETCH1     | PC: 0030 |                    | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0188 | FETCH2     | PC: 0030 | OP: store          | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0189 | EXEC 1/3   | PC: 0030 | OP: store          | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0190 | EXEC 2/3   | PC: 0030 | OP: store          | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0191 | EXEC 3/3   | PC: 0030 | OP: store          | TOS:            3 | DS: 2 | RS: 0 | C: 0 | V: 0
+  TICK: 0192 | FETCH1     | PC: 0031 |                    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0193 | FETCH2     | PC: 0031 | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0194 | EXEC 1/3   | PC: 0031 | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0195 | EXEC 2/3   | PC: 0031 | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0196 | EXEC 3/3   | PC: 0031 | OP: push_m 1024    | TOS:            0 | DS: 0 | RS: 0 | C: 0 | V: 0
+  TICK: 0197 | FETCH1     | PC: 0032 |                    | TOS:            3 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0198 | FETCH2     | PC: 0032 | OP: jmp 12         | TOS:            3 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0199 | EXEC 1/1   | PC: 0032 | OP: jmp 12         | TOS:            3 | DS: 1 | RS: 0 | C: 0 | V: 0
+  TICK: 0200 | FETCH1     | PC: 0012 |                    | TOS:            3 | DS: 1 | RS: 0 | C: 0 | V: 0

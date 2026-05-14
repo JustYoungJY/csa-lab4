@@ -113,11 +113,13 @@ class ControlUnit:
         self.ie: bool = False
         self.halted: bool = False
 
-        self.phase: str = "FETCH1"  # "FETCH1" | "FETCH2" | "EXEC"
+        self.phase: str = "FETCH1"          # "FETCH1" | "FETCH2" | "EXEC"
         self.ar: int = 0
         self.ir: Instruction | None = None
-        self.instr_pc: int = 1  # PC recorded at the start of FETCH1
-        self.exec_ticks_left: int = 0  # remaining execute ticks for current instruction
+        self.instr_pc: int = 1               # PC recorded at the start of FETCH1
+        self.exec_ticks_left: int = 0        # remaining execute ticks for current instruction
+        self.exec_total: int = 0             # total execute ticks for current instruction
+        self.exec_tick_num: int = 0          # 1-based current execute tick number
 
     def _deliver_io(self) -> None:
         """Place scheduled characters in input_reg if their tick has arrived."""
@@ -127,18 +129,23 @@ class ControlUnit:
                 self.dp.input_reg = char
             # else: register occupied — character silently dropped
 
+    def _log(self, phase: str, info: str = "") -> None:
+        """Emit one log line for the current tick."""
+        logging.info(
+            f"TICK: {self.tick_counter:04} | {phase:<10} | PC: {self.instr_pc:04} | {info:<18} | "
+            f"TOS: {self.dp.get_tos():12} | DS: {len(self.dp.data_stack)} | "
+            f"RS: {len(self.dp.return_stack)} | C: {self.dp.carry} | V: {self.dp.overflow}"
+        )
+
     def _handle_interrupt(self) -> None:
         """Fire an interrupt: push instr_pc onto RS, jump to vector 0, disable IE."""
-        logging.info(
-            f"TICK: {self.tick_counter:04} | INTERRUPT | saved PC: {self.instr_pc:<8} | "
-            f"TOS: {self.dp.get_tos():12} | DS: {len(self.dp.data_stack)} | "
-            f"RS: {len(self.dp.return_stack) + 1}"
-        )
         self.dp.return_stack.append(self.instr_pc)
         self.pc = 0
         self.ie = False
         self.phase = "FETCH1"
         self.exec_ticks_left = 0
+        self.exec_tick_num = 0
+        self._log("INTERRUPT", f"saved: {self.instr_pc:04}")
 
     def _execute(self, instr: Instruction) -> None:
         """Perform the semantic operation of instr."""
@@ -275,6 +282,7 @@ class ControlUnit:
                 return
             self.ar = self.pc
             self.phase = "FETCH2"
+            self._log("FETCH1")
 
         elif self.phase == "FETCH2":
             if self.ie and irq:
@@ -284,17 +292,17 @@ class ControlUnit:
             self.ir = Instruction.decode(struct.pack(">I", machine_word))
             self.pc += 1
             self.exec_ticks_left = _EXEC_TICKS.get(self.ir.opcode, 1)
-            logging.info(
-                f"TICK: {self.tick_counter:04} | PC: {self.instr_pc:04}  | OP: {self.ir!s:<14} | "
-                f"TOS: {self.dp.get_tos():12} | DS: {len(self.dp.data_stack)} | "
-                f"RS: {len(self.dp.return_stack)} | C: {self.dp.carry} | V: {self.dp.overflow}"
-            )
+            self.exec_total = self.exec_ticks_left
+            self.exec_tick_num = 0
             self.phase = "EXEC"
+            self._log("FETCH2", f"OP: {self.ir!s}")
 
         elif self.phase == "EXEC":
             if self.ie and irq:
                 self._handle_interrupt()
                 return
+            self.exec_tick_num += 1
+            self._log(f"EXEC {self.exec_tick_num}/{self.exec_total}", f"OP: {self.ir!s}")
             self.exec_ticks_left -= 1
             if self.exec_ticks_left == 0:
                 assert self.ir is not None, "IR must be set before EXEC phase"
